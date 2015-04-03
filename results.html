@@ -1,0 +1,447 @@
+Starting ChromeDriver (v2.8.241075) on port 9515
+Starting ChromeDriver (v2.8.241075) on port 9516
+Starting ChromeDriver (v2.8.241075) on port 9517
+Starting ChromeDriver (v2.8.241075) on port 9518
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <title>RSpec results</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Expires" content="-1" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <style type="text/css">
+  body {
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    font-size: 80%;
+  }
+  </style>
+  <script type="text/javascript">
+    // <![CDATA[
+
+function addClass(element_id, classname) {
+  document.getElementById(element_id).className += (" " + classname);
+}
+
+function removeClass(element_id, classname) {
+  var elem = document.getElementById(element_id);
+  var classlist = elem.className.replace(classname,'');
+  elem.className = classlist;
+}
+
+function moveProgressBar(percentDone) {
+  document.getElementById("rspec-header").style.width = percentDone +"%";
+}
+
+function makeRed(element_id) {
+  removeClass(element_id, 'passed');
+  removeClass(element_id, 'not_implemented');
+  addClass(element_id,'failed');
+}
+
+function makeYellow(element_id) {
+  var elem = document.getElementById(element_id);
+  if (elem.className.indexOf("failed") == -1) {  // class doesn't includes failed
+    if (elem.className.indexOf("not_implemented") == -1) { // class doesn't include not_implemented
+      removeClass(element_id, 'passed');
+      addClass(element_id,'not_implemented');
+    }
+  }
+}
+
+function apply_filters() {
+  var passed_filter = document.getElementById('passed_checkbox').checked;
+  var failed_filter = document.getElementById('failed_checkbox').checked;
+  var pending_filter = document.getElementById('pending_checkbox').checked;
+
+  assign_display_style("example passed", passed_filter);
+  assign_display_style("example failed", failed_filter);
+  assign_display_style("example not_implemented", pending_filter);
+
+  assign_display_style_for_group("example_group passed", passed_filter);
+  assign_display_style_for_group("example_group not_implemented", pending_filter, pending_filter || passed_filter);
+  assign_display_style_for_group("example_group failed", failed_filter, failed_filter || pending_filter || passed_filter);
+}
+
+function get_display_style(display_flag) {
+  var style_mode = 'none';
+  if (display_flag == true) {
+    style_mode = 'block';
+  }
+  return style_mode;
+}
+
+function assign_display_style(classname, display_flag) {
+  var style_mode = get_display_style(display_flag);
+  var elems = document.getElementsByClassName(classname)
+  for (var i=0; i<elems.length;i++) {
+    elems[i].style.display = style_mode;
+  }
+}
+
+function assign_display_style_for_group(classname, display_flag, subgroup_flag) {
+  var display_style_mode = get_display_style(display_flag);
+  var subgroup_style_mode = get_display_style(subgroup_flag);
+  var elems = document.getElementsByClassName(classname)
+  for (var i=0; i<elems.length;i++) {
+    var style_mode = display_style_mode;
+    if ((display_flag != subgroup_flag) && (elems[i].getElementsByTagName('dt')[0].innerHTML.indexOf(", ") != -1)) {
+      elems[i].style.display = subgroup_style_mode;
+    } else {
+      elems[i].style.display = display_style_mode;
+    }
+  }
+}
+
+    // ]]>
+  </script>
+  <style type="text/css">
+#rspec-header {
+  background: #65C400; color: #fff; height: 4em;
+}
+
+.rspec-report h1 {
+  margin: 0px 10px 0px 10px;
+  padding: 10px;
+  font-family: "Lucida Grande", Helvetica, sans-serif;
+  font-size: 1.8em;
+  position: absolute;
+}
+
+#label {
+  float:left;
+}
+
+#display-filters {
+  float:left;
+  padding: 28px 0 0 40%;
+  font-family: "Lucida Grande", Helvetica, sans-serif;
+}
+
+#summary {
+  float:right;
+  padding: 5px 10px;
+  font-family: "Lucida Grande", Helvetica, sans-serif;
+  text-align: right;
+}
+
+#summary p {
+  margin: 0 0 0 2px;
+}
+
+#summary #totals {
+  font-size: 1.2em;
+}
+
+.example_group {
+  margin: 0 10px 5px;
+  background: #fff;
+}
+
+dl {
+  margin: 0; padding: 0 0 5px;
+  font: normal 11px "Lucida Grande", Helvetica, sans-serif;
+}
+
+dt {
+  padding: 3px;
+  background: #65C400;
+  color: #fff;
+  font-weight: bold;
+}
+
+dd {
+  margin: 5px 0 5px 5px;
+  padding: 3px 3px 3px 18px;
+}
+
+dd .duration {
+  padding-left: 5px;
+  text-align: right;
+  right: 0px;
+  float:right;
+}
+
+dd.example.passed {
+  border-left: 5px solid #65C400;
+  border-bottom: 1px solid #65C400;
+  background: #DBFFB4; color: #3D7700;
+}
+
+dd.example.not_implemented {
+  border-left: 5px solid #FAF834;
+  border-bottom: 1px solid #FAF834;
+  background: #FCFB98; color: #131313;
+}
+
+dd.example.pending_fixed {
+  border-left: 5px solid #0000C2;
+  border-bottom: 1px solid #0000C2;
+  color: #0000C2; background: #D3FBFF;
+}
+
+dd.example.failed {
+  border-left: 5px solid #C20000;
+  border-bottom: 1px solid #C20000;
+  color: #C20000; background: #FFFBD3;
+}
+
+
+dt.not_implemented {
+  color: #000000; background: #FAF834;
+}
+
+dt.pending_fixed {
+  color: #FFFFFF; background: #C40D0D;
+}
+
+dt.failed {
+  color: #FFFFFF; background: #C40D0D;
+}
+
+
+#rspec-header.not_implemented {
+  color: #000000; background: #FAF834;
+}
+
+#rspec-header.pending_fixed {
+  color: #FFFFFF; background: #C40D0D;
+}
+
+#rspec-header.failed {
+  color: #FFFFFF; background: #C40D0D;
+}
+
+
+.backtrace {
+  color: #000;
+  font-size: 12px;
+}
+
+a {
+  color: #BE5C00;
+}
+
+/* Ruby code, style similar to vibrant ink */
+.ruby {
+  font-size: 12px;
+  font-family: monospace;
+  color: white;
+  background-color: black;
+  padding: 0.1em 0 0.2em 0;
+}
+
+.ruby .keyword { color: #FF6600; }
+.ruby .constant { color: #339999; }
+.ruby .attribute { color: white; }
+.ruby .global { color: white; }
+.ruby .module { color: white; }
+.ruby .class { color: white; }
+.ruby .string { color: #66FF00; }
+.ruby .ident { color: white; }
+.ruby .method { color: #FFCC00; }
+.ruby .number { color: white; }
+.ruby .char { color: white; }
+.ruby .comment { color: #9933CC; }
+.ruby .symbol { color: white; }
+.ruby .regex { color: #44B4CC; }
+.ruby .punct { color: white; }
+.ruby .escape { color: white; }
+.ruby .interp { color: white; }
+.ruby .expr { color: white; }
+
+.ruby .offending { background-color: gray; }
+.ruby .linenum {
+  width: 75px;
+  padding: 0.1em 1em 0.2em 0;
+  color: #000000;
+  background-color: #FFFBD3;
+}
+
+  </style>
+</head>
+<body>
+<div class="rspec-report">
+
+<div id="rspec-header">
+  <div id="label">
+    <h1>RSpec Code Examples</h1>
+  </div>
+
+  <div id="display-filters">
+    <input id="passed_checkbox"  name="passed_checkbox"  type="checkbox" checked="checked" onchange="apply_filters()" value="1" /> <label for="passed_checkbox">Passed</label>
+    <input id="failed_checkbox"  name="failed_checkbox"  type="checkbox" checked="checked" onchange="apply_filters()" value="2" /> <label for="failed_checkbox">Failed</label>
+    <input id="pending_checkbox" name="pending_checkbox" type="checkbox" checked="checked" onchange="apply_filters()" value="3" /> <label for="pending_checkbox">Pending</label>
+  </div>
+
+  <div id="summary">
+    <p id="totals">&#160;</p>
+    <p id="duration">&#160;</p>
+  </div>
+</div>
+
+
+<div class="results">
+<div id="div_group_1" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_1" class="passed">The test will validate that:</dt>
+Passed!
+    <script type="text/javascript">moveProgressBar('2.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">Main page should not return an invalid error message, title corresponds to the expected value and there aren&#39;t any errors/exceptions </span><span class='duration'>1.10908s</span></dd>
+  </dl>
+</div>
+<div id="div_group_2" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_2" class="passed">The test will validate that valid user can login successfully and main page should contain main categories: ADMINISTRATION; FORECASTING, ANALYSIS &amp; REPORTING; REFERENCE INFORMATION MANAGEMENT and USER MANUAL.</dt>
+Passed!
+    <script type="text/javascript">moveProgressBar('5.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">Valid user can login successfully and main page should not return an invalid error message containing main categories: ADMINISTRATION; FORECASTING, ANALYSIS &amp; REPORTING; REFERENCE INFORMATION MANAGEMENT and USER MANUAL</span><span class='duration'>1.85889s</span></dd>
+  </dl>
+</div>
+<div id="div_group_3" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_3" class="passed">The test will validate all the expected landing page presence:</dt>
+Passed!
+    <script type="text/javascript">moveProgressBar('7.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">Check all expected categories and links presence</span><span class='duration'>9.02911s</span></dd>
+  </dl>
+</div>
+<div id="div_group_4" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_4" class="passed">The test will validate that all the links (besides: Logout; Confirmations; Glossary; Online Users; PAS Monthly Reporting Timetable and PAS Invoicing Timetable) on the main page are opening, the title of each corresponds to the expected value and there are no errors/exceptions</dt>
+Passed!
+    <script type="text/javascript">moveProgressBar('10.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">Check User Access Rights opening &amp; loading.</span><span class='duration'>6.20150s</span></dd>
+Passed!
+    <script type="text/javascript">moveProgressBar('12.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">Check Project Forecasting &amp; Analysis opening &amp; loading.</span><span class='duration'>3.57719s</span></dd>
+Passed!
+    <script type="text/javascript">moveProgressBar('15.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">Check BU Forecasting &amp; Analysis opening &amp; loading.</span><span class='duration'>1.95261s</span></dd>
+Passed!
+    <script type="text/javascript">moveProgressBar('17.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">Check Country Management opening &amp; loading.</span><span class='duration'>1.51523s</span></dd>
+Passed!
+    <script type="text/javascript">moveProgressBar('20.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">Check Area Management opening &amp; loading.</span><span class='duration'>1.46838s</span></dd>
+Passed!
+    <script type="text/javascript">moveProgressBar('22.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">Check Company Forecasting &amp; Analysis opening &amp; loading.</span><span class='duration'>10.40379s</span></dd>
+Passed!
+    <script type="text/javascript">moveProgressBar('25.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">Check Pipeline Opportunities opening &amp; loading.</span><span class='duration'>2.84308s</span></dd>
+Failed.....
+    <script type="text/javascript">makeRed('rspec-header');</script>
+    <script type="text/javascript">makeRed('div_group_4');</script>
+    <script type="text/javascript">makeRed('example_group_4');</script>
+    <script type="text/javascript">moveProgressBar('27.5');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">Check Tutorials (Video) opening &amp; loading.</span>
+      <span class="duration">0.82793s</span>
+      <div class="failure" id="failure_1">
+        <div class="message"><pre>expected &quot;An Error is detected&quot; to include &quot;Tutorials&quot;</pre></div>
+        <div class="backtrace"><pre>./spec/004_test_landing_links_opening_spec.rb:93:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">91</span>      <span class="ident">browser</span><span class="punct">.</span><span class="ident">text</span><span class="punct">.</span><span class="ident">should_not</span> <span class="ident">include</span><span class="punct">(&quot;</span><span class="string">The requested URL could not be retrieved</span><span class="punct">&quot;)</span>
+<span class="linenum">92</span>      <span class="ident">browser</span><span class="punct">.</span><span class="ident">text</span><span class="punct">.</span><span class="ident">should_not</span> <span class="ident">include</span> <span class="punct">(&quot;</span><span class="string">java.lang.RuntimeException</span><span class="punct">&quot;)</span>
+<span class="offending"><span class="linenum">93</span>      <span class="ident">browser</span><span class="punct">.</span><span class="ident">title</span><span class="punct">.</span><span class="ident">should</span> <span class="ident">include</span> <span class="punct">(</span><span class="ident">x</span><span class="punct">.</span><span class="ident">split</span><span class="punct">(&quot;</span><span class="string"> </span><span class="punct">&quot;).</span><span class="ident">first</span><span class="punct">)</span></span>
+<span class="linenum">94</span>      <span class="ident">browser</span><span class="punct">.</span><span class="ident">text</span><span class="punct">.</span><span class="ident">should</span> <span class="ident">include</span> <span class="punct">(</span><span class="ident">x</span><span class="punct">.</span><span class="ident">split</span><span class="punct">(&quot;</span><span class="string"> </span><span class="punct">&quot;).</span><span class="ident">first</span><span class="punct">)</span>
+<span class="linenum">95</span>    <span class="keyword">end</span></code></pre>
+      </div>
+    </dd>
+Passed!
+    <script type="text/javascript">moveProgressBar('30.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">Check Guides (PDF) opening &amp; loading.</span><span class='duration'>0.93728s</span></dd>
+Passed!
+    <script type="text/javascript">moveProgressBar('32.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">Check Release Notes (NEW) opening &amp; loading.</span><span class='duration'>1.34341s</span></dd>
+Passed!
+    <script type="text/javascript">moveProgressBar('35.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">Check Standard Cost Matrix opening &amp; loading.</span><span class='duration'>3.51475s</span></dd>
+Passed!
+    <script type="text/javascript">moveProgressBar('37.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">Check Project Access Rights opening &amp; loading.</span><span class='duration'>2.20258s</span></dd>
+Passed!
+    <script type="text/javascript">moveProgressBar('40.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">Check Feedback and Suggestions opening &amp; loading.</span><span class='duration'>0.73419s</span></dd>
+Passed!
+    <script type="text/javascript">moveProgressBar('42.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">Check Exchange Rates Management opening &amp; loading.</span><span class='duration'>1.93702s</span></dd>
+Passed!
+    <script type="text/javascript">moveProgressBar('45.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">Check Client Management opening &amp; loading.</span><span class='duration'>24.52496s</span></dd>
+Passed!
+    <script type="text/javascript">moveProgressBar('47.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">Check Projects List opening &amp; loading.</span><span class='duration'>9.48213s</span></dd>
+Passed!
+    <script type="text/javascript">moveProgressBar('50.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">Check Favourite Project Groups opening &amp; loading.</span><span class='duration'>14.04328s</span></dd>
+Passed!
+    <script type="text/javascript">moveProgressBar('52.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">Check Users opening &amp; loading.</span><span class='duration'>2.65555s</span></dd>
+Passed!
+    <script type="text/javascript">moveProgressBar('55.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">Check System Actions Management opening &amp; loading.</span><span class='duration'>2.06196s</span></dd>
+Passed!
+    <script type="text/javascript">moveProgressBar('57.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">Check Clearing House opening &amp; loading.</span><span class='duration'>1.29655s</span></dd>
+Passed!
+    <script type="text/javascript">moveProgressBar('60.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">Check DU Capacity opening &amp; loading.</span><span class='duration'>1.37467s</span></dd>
+Passed!
+    <script type="text/javascript">moveProgressBar('62.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">Check Contract Order Book Analysis opening &amp; loading.</span><span class='duration'>2.29633s</span></dd>
+Passed!
+    <script type="text/javascript">moveProgressBar('65.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">Check Client Order Book Analysis opening &amp; loading.</span><span class='duration'>1.31219s</span></dd>
+Passed!
+    <script type="text/javascript">moveProgressBar('67.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">Check Business Unit Order Book Analysis opening &amp; loading.</span><span class='duration'>1.24970s</span></dd>
+Passed!
+    <script type="text/javascript">moveProgressBar('70.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">Check Project Monthly Reports opening &amp; loading.</span><span class='duration'>2.06201s</span></dd>
+Passed!
+    <script type="text/javascript">moveProgressBar('72.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">Check Client Monthly Reports opening &amp; loading.</span><span class='duration'>1.79645s</span></dd>
+Passed!
+    <script type="text/javascript">moveProgressBar('75.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">Check BU Monthly Reports opening &amp; loading.</span><span class='duration'>2.68686s</span></dd>
+Passed!
+    <script type="text/javascript">moveProgressBar('77.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">Check PAS Reports opening &amp; loading.</span><span class='duration'>0.96852s</span></dd>
+Passed!
+    <script type="text/javascript">moveProgressBar('80.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">Check Dashboard Reports opening &amp; loading.</span><span class='duration'>3.35855s</span></dd>
+Passed!
+    <script type="text/javascript">moveProgressBar('82.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">Check Automatic Report Archives opening &amp; loading.</span><span class='duration'>3.18670s</span></dd>
+Passed!
+    <script type="text/javascript">moveProgressBar('85.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">Check Region Management opening &amp; loading.</span><span class='duration'>1.62460s</span></dd>
+Passed!
+    <script type="text/javascript">moveProgressBar('87.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">Check Legal Entity Management opening &amp; loading.</span><span class='duration'>1.90577s</span></dd>
+Passed!
+    <script type="text/javascript">moveProgressBar('90.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">Check Business Unit Management opening &amp; loading.</span><span class='duration'>2.09323s</span></dd>
+Passed!
+    <script type="text/javascript">moveProgressBar('92.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">Check Business Unit Group Management opening &amp; loading.</span><span class='duration'>1.49962s</span></dd>
+Passed!
+    <script type="text/javascript">moveProgressBar('95.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">Check Currency Management opening &amp; loading.</span><span class='duration'>1.24969s</span></dd>
+Passed!
+    <script type="text/javascript">moveProgressBar('97.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">Check Working Days Management opening &amp; loading.</span><span class='duration'>4.03023s</span></dd>
+Passed!
+    <script type="text/javascript">moveProgressBar('100.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">Check Budget Management opening &amp; loading.</span><span class='duration'>1.56210s</span></dd>
+Moved the screenshots to D:/Builds/workspace/PAS(SmokeTest)(QA2)/logs/qa2 2014-02-14 13-5 run
+  </dl>
+</div>
+<script type="text/javascript">document.getElementById('duration').innerHTML = "Finished in <strong>164.00594 seconds</strong>";</script>
+<script type="text/javascript">document.getElementById('totals').innerHTML = "40 examples, 1 failure";</script>
+</div>
+</div>
+</body>
+</html>
